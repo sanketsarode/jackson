@@ -1,6 +1,7 @@
 package com.jackson.test;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 
@@ -151,6 +152,46 @@ public class TestCars {
             System.out.println("Converting JSON string to java map object");
             System.out.println("Car Brand: " + c.get("brand"));
             System.out.println("Car Doors: " + c.get("doors"));
+            System.out.println();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Configure object mapper to handle null values in JSON for primitive data types in Java
+     */
+    @Test
+    public void handlingNullObjectMapperPrimitiveDataTypes() {
+        car = "{\"brand\" : \"Hyundai\", \"doors\" : null}";
+        ObjectMapper objMapper = new ObjectMapper();
+        objMapper.configure(DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES, false);
+        try {
+            Car c = objMapper.readValue(car, Car.class);
+
+            System.out.println("Handling Null properties in JSON");
+            System.out.println("Car Brand: " + c.getBrand());
+            System.out.println("Car Doors: " + c.getDoors());
+            System.out.println();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Configure object mapper to handle unknown properties in JSON
+     */
+    @Test
+    public void handlingUnknownObjectMapperPrimitiveDataTypes() {
+        car = "{\"brand\" : \"Hyundai\", \"doors\" : 5, \"type\" : \"Compact\"}";
+        ObjectMapper objMapper = new ObjectMapper();
+        objMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        try {
+            Car c = objMapper.readValue(car, Car.class);
+
+            System.out.println("Handling unknown properties in JSON");
+            System.out.println("Car Brand: " + c.getBrand());
+            System.out.println("Car Doors: " + c.getDoors());
             System.out.println();
         } catch (Exception e) {
             e.printStackTrace();
