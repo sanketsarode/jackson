@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.List;
 import java.util.Map;
 
-public class TestCars {
+public class DeserializeTests {
 
     ObjectMapper objmapper = new ObjectMapper();
     String car = null;
