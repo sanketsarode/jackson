@@ -22,14 +22,14 @@ public class JacksonTreeModel {
             //JsonNode jsonNode = objectMapper.readTree(car);
 
             System.out.println("Using JsonNode Jackson Tree Model Class to Deserialize the JSON String");
-            System.out.println("Car Brand: " + jsonNode.get("brand"));
+            System.out.println("Car Brand: " + jsonNode.get("brand").asText());
             System.out.println("Car Doors: " + jsonNode.get("doors"));
 
             JsonNode owners = jsonNode.get("owners");
-            System.out.println("Owners: " + owners.get(0) + " , " + owners.get(1) + " , " + owners.get(2));
+            System.out.println("Owners: " + owners.get(0).asText() + " , " + owners.get(1).asText() + " , " + owners.get(2).asText());
 
             JsonNode nestedObj = jsonNode.get("nestedObject");
-            System.out.println("Field: " + nestedObj.get("field"));
+            System.out.println("Field: " + nestedObj.get("field").asText());
 
             System.out.println();
         } catch (Exception e) {
