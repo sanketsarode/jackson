@@ -69,4 +69,36 @@ public class JacksonTreeModel {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void jsonStringContainsNull() {
+        car = "{ \"brand\" : \"Hyundai\", \"doors\" : null}";
+
+        try {
+            JsonNode jsonNode = objectMapper.readValue(car, JsonNode.class);
+
+            System.out.println("Json String contains the null value for one of the attributes");
+            System.out.println("Car Brand: " + jsonNode.get("brand"));
+            System.out.println("Car Doors: " + jsonNode.get("doors"));
+            System.out.println();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void missingJsonStringAttribute() {
+        car = "{ \"brand\" : \"Hyundai\"}";
+
+        try {
+            JsonNode jsonNode = objectMapper.readValue(car, JsonNode.class);
+
+            System.out.println("Json String has missing attributes");
+            System.out.println("Car Brand: " + jsonNode.get("brand"));
+            System.out.println("Car Doors: " + jsonNode.get("doors"));
+            System.out.println();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
